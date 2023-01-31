@@ -6,7 +6,8 @@ using UnityEngine.Networking;
 
 public class Main : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Start is called before the first frame update   
+    public RequestTrivia request=null;
     void Start()
     {
         string[] parameters= {"amount=10"};
@@ -41,9 +42,12 @@ public class Main : MonoBehaviour
                     Debug.LogError(": HTTP Error: " + webRequest.error);
                     break;
                 case UnityWebRequest.Result.Success:
-                    Debug.Log(":\nReceived: " + webRequest.downloadHandler.text);
+                    string jsonResponse = webRequest.downloadHandler.text;
+                    Debug.LogError(jsonResponse);
+                    request=JsonUtility.FromJson<RequestTrivia>(jsonResponse);                     
                     break;
             }
+             //Debug.LogError(request.results);
         }
         
     }
