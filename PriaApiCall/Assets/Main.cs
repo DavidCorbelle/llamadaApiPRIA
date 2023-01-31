@@ -43,13 +43,22 @@ public class Main : MonoBehaviour
                     break;
                 case UnityWebRequest.Result.Success:
                     string jsonResponse = webRequest.downloadHandler.text;
-                    Debug.LogError(jsonResponse);
                     request=JsonUtility.FromJson<RequestTrivia>(jsonResponse);                     
                     break;
             }
-             //Debug.LogError(request.results);
+           devoucionPorConsola();
         }
         
+    }
+    void devoucionPorConsola(){
+        Debug.Log("Preguntas Solicitadas: "+request.results.Count);
+        Debug.Log("----------------------------------------------");
+        Debug.Log("Pregunta1: ");
+        Debug.Log("Categoria: "+request.results[0].category);
+        Debug.Log("Tipo: "+request.results[0].type);
+        Debug.Log("Dificultad: "+request.results[0].difficulty);
+        Debug.Log("Pregunta: "+request.results[0].question);
+
     }
     // Update is called once per frame
     void Update()
